@@ -100,7 +100,8 @@ from handlers import (start,
     university_fees,
     internet_providers,
     bill_and_units,
-    links as links_handler,   
+    links as links_handler, 
+    tournaments,
 )
 from handlers.keyboards import (
     main_menu,
@@ -135,7 +136,7 @@ bill_and_units.register_bill_and_units(bot, history)
 links_handler.register(bot, history)
 # ✅ تسجيل المنتجات مرة واحدة وتمرير admin_ids هنا
 products.register(bot, history, admin_ids=[6935846121])
-
+tournaments.register(bot, history)
 media_services.register(bot, history)
 wholesale.register(bot, history)
 university_fees.register_university_fees(bot, history)
