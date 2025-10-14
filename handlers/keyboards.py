@@ -1,12 +1,15 @@
 from telebot import types
 import logging
+from services.feature_flags import is_feature_enabled
 
 def main_menu():
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
 
     # الصف 1: المنتجات فقط
     markup.row("🛒 المنتجات", "➕ إضافة خصم")
+if is_feature_enabled("menu:tournaments", True):
     markup.row("🏆 البطولة")
+
     # باقي الصفوف كما كانت
     markup.row("💳 شحن محفظتي", "💰 محفظتي")
     markup.row("📢 إعلاناتك", "🌐 صفحتنا")
