@@ -140,6 +140,13 @@ LEGACY_UNIQUE: Dict[str, str] = {
     # شراء جملة
     "wholesale": "شراء جملة",
 }
+# بطولات
+TOURNAMENTS_KEYS: Dict[str, str] = {
+    "menu:tournaments": "القائمة: البطولة",
+    "tournaments:solo":  "بطولة سولو 1vs100",
+    "tournaments:duo":   "بطولة دو 2vs100",
+    "tournaments:squad": "بطولة سكواد 4vs100",
+}
 
 # ========== بذرة موحّدة ==========
 FEATURES_SEED: Dict[str, str] = {
@@ -149,7 +156,8 @@ FEATURES_SEED: Dict[str, str] = {
     **RECHARGE_KEYS,
     **GAMES_KEYS,
     **COMPANIES_KEYS,
-    **LEGACY_UNIQUE,   # تُضاف كما هي لأنها ليست مكررة
+    **TOURNAMENTS_KEYS,
+    **LEGACY_UNIQUE,
 }
 
 # ==============================
