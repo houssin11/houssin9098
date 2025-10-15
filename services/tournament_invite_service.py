@@ -1,4 +1,5 @@
 # services/tournament_invite_service.py
+from datetime import datetime, timezone
 from __future__ import annotations
 from typing import Tuple, Optional
 from database.db import client
@@ -34,9 +35,10 @@ def attach_invite(token: str, invitee_id: int) -> Optional[int]:
     return inviter
 
 def mark_verified(inviter_id: int, invitee_id: int, still_member: bool):
-    client().table(INV).update({
-        "verified_at": "now()", "still_member": bool(still_member)
-    }).eq("inviter_user_id", inviter_id).eq("invitee_user_id", invitee_id).execute()
+client().table(INV).update({
+    "verified_at": datetime.now(timezone.utc).isoformat(),
+    "still_member": bool(still_member),
+}).eq("inviter_user_id", inviter_id).eq("invitee_user_id", invitee_id).execute()
 
 def count_verified(inviter_id: int) -> Tuple[int, int, bool]:
     req = 2
