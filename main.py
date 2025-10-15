@@ -137,6 +137,7 @@ bill_and_units.register_bill_and_units(bot, history)
 links_handler.register(bot, history)
 # ✅ تسجيل المنتجات مرة واحدة وتمرير admin_ids هنا
 products.register(bot, history, admin_ids=[6935846121])
+tournament_invite_start.register(bot)
 tournaments.register(bot, history)
 media_services.register(bot, history)
 wholesale.register(bot, history)
