@@ -75,13 +75,18 @@ def register(bot, history):
         # تحقق الدعوات
         cnt, req, ok = count_verified_invites(c.from_user.id, 2)
         if not ok:
+            from services.tournament_invite_service import ensure_token
+            token = ensure_token(c.from_user.id)
+            invite_link = f"https://t.me/{bot.get_me().username}?start={token}"
             kb = types.InlineKeyboardMarkup(row_width=1)
             kb.add(types.InlineKeyboardButton(f"🔔 اشترك بالقناة {FORCE_SUB_CHANNEL_USERNAME}", url=f"https://t.me/{FORCE_SUB_CHANNEL_USERNAME.lstrip('@')}"))
+            kb.add(types.InlineKeyboardButton("🔗 رابط دعوتك للبطولة", url=invite_link))
             kb.add(types.InlineKeyboardButton("🔁 تحقق مجددًا", callback_data=CB(f"type:{type_key}")))
             kb.add(types.InlineKeyboardButton("❌ إلغاء", callback_data=CB("cancel")))
-            txt = f"شرط الانضمام:\n1) ادعُ صديقين واشتركوا في القناة.\n2) 2000 ل.س اشتراك.\n\nالتقدّم: {cnt}/{req}"
+            txt = f"شرط الانضمام:\n1) ادعُ صديقين واشتركوا في القناة عبر رابطك.\n2) 2000 ل.س اشتراك.\n\nالتقدّم: {cnt}/{req}"
             bot.edit_message_text(txt, c.message.chat.id, c.message.message_id, reply_markup=kb)
             return
+
         # تحقق الرصيد فقط (بدون حجز)
         need = int(t.get("entry_fee") or 2000)
         have = get_available_balance(c.from_user.id)
