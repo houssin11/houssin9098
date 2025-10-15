@@ -36,6 +36,8 @@ def count_verified_invites(referrer_id: int, required_count: int = 2) -> Tuple[i
     q = client().table("referral_joins").select("id,verified_at,still_member").eq("goal_id", gid).execute()
     cnt = sum(1 for r in (getattr(q,"data",[]) or []) if r.get("verified_at") and r.get("still_member"))
     return cnt, required_count, cnt>=required_count
+    
+from services.tournament_invite_service import count_verified as count_verified_invites
 
 def numbers_available(tournament_id: str) -> List[Dict[str,int]]:
     try:
