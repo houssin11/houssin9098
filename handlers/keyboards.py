@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from telebot import types
 import logging
 from services.feature_flags import is_feature_enabled
