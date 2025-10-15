@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # handlers/tournaments.py
 from __future__ import annotations
 from telebot import types
