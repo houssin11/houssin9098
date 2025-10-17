@@ -185,7 +185,7 @@ def register(bot, user_history):
             bot.send_message(
                 call.message.chat.id,
                 "✨ تم تسجيلك بنجاح! هذه القائمة الرئيسية.",
-                reply_markup=keyboards.main_menu()
+                reply_markup=keyboards.main_menu(call.from_user.id)  # ← تمرير user_id لإظهار لوحة الأدمن
             )
         except Exception as e:
             logging.error(f"[start.py] cb_start_main: {e}")
@@ -196,7 +196,7 @@ def register(bot, user_history):
         bot.send_message(
             message.chat.id,
             "📝 للمساعدة والدعم، راسل الإدارة على الخاص أو تحقق من القناة الرسمية.",
-            reply_markup=keyboards.main_menu()
+            reply_markup=keyboards.main_menu(message.from_user.id)  # ← تمرير user_id
         )
         
     @bot.message_handler(commands=['about'])
@@ -205,7 +205,7 @@ def register(bot, user_history):
             message.chat.id,
             f"🤖 هذا البوت من تطوير {BOT_NAME}.\n"
             "نحن نقدم أفضل الخدمات بأقل الأسعار!",
-            reply_markup=keyboards.main_menu()
+            reply_markup=keyboards.main_menu(message.from_user.id)  # ← تمرير user_id
         )
 
     @bot.message_handler(func=lambda msg: msg.text == "⬅️ رجوع")
@@ -213,7 +213,7 @@ def register(bot, user_history):
         bot.send_message(
             message.chat.id,
             "تم الرجوع إلى القائمة الرئيسية.",
-            reply_markup=keyboards.main_menu()
+            reply_markup=keyboards.main_menu(message.from_user.id)  # ← تمرير user_id
         )
 
 # ---- رسالة الترحيب ----
@@ -234,4 +234,3 @@ WELCOME_MESSAGE = (
     "🔔 *هل أنت جاهز؟* لأننا على استعداد تام لتلبية احتياجاتك!\n"
     "👇 اضغط على زر ✨ للمتابعة."
 )
-
